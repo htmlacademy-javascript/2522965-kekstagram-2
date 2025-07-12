@@ -6,12 +6,10 @@ const pictureCollection = document.querySelectorAll('.picture');
 const postList = document.querySelector('.pictures');
 const fullPost = document.querySelector('.big-picture');
 const closeFullPost = document.querySelector('.big-picture__cancel');
-const fullPostPhoto = fullPost.querySelector('.big-picture__img')
-  .querySelector('img');
+const fullPostPhoto = fullPost.querySelector('.big-picture__img').querySelector('img');
 const fullPostLikes = fullPost.querySelector('.likes-count');
 const fullPhotoDescription = fullPost.querySelector('.social__caption');
 const fullPostTotalComments = fullPost.querySelector('.social__comment-total-count');
-// const fullPostShownComments = fullPost.querySelector('.social__comment-shown-count');
 const commentsContainer = fullPost.querySelector('.social__comments');
 const commentTemplate = fullPost.querySelector('.social__comment');
 const commentsCounter = fullPost.querySelector('.social__comment-count');
@@ -95,3 +93,5 @@ function renderFullPhoto ({comments, description, url, likes}) {
   fullPostTotalComments.textContent = comments.length;
   fullPhotoDescription.textContent = description;
 }
+
+export {postList, onClosePostClick};

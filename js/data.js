@@ -1,5 +1,5 @@
 import {getRandomInteger, getRandomArrayElement} from './utils.js';
-import { DESCRIPTIONS, MAX_AVATAR, MAX_COMMENT, MAX_LIKES, MESSAGES, MIN_AVATAR, MIN_COMMENT, MIN_LIKES, NAMES, PHOTOS_COUNT } from "./constants.js";
+import {DESCRIPTIONS, MAX_AVATAR, MAX_COMMENT, MAX_LIKES, MESSAGES, MIN_AVATAR, MIN_COMMENT, MIN_LIKES, NAMES, PHOTOS_COUNT} from "./constants.js";
 
 function generateRandomDescription() { // Возвращаю случайное описание фотки
   return DESCRIPTIONS[Math.floor(Math.random() * DESCRIPTIONS.length)]; // возвращаю случайное описание

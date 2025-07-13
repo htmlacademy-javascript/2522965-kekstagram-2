@@ -30,3 +30,6 @@ export const MIN_COMMENT = 0;
 export const MAX_COMMENT = 30;
 export const MIN_AVATAR = 1;
 export const MAX_AVATAR = 6;
+
+export const MAX_DESCRIPTION_LENGTH = 140;
+export const MAX_HASHTAGS_LENGTH = 5;

@@ -1,44 +1,54 @@
+import {getRandomInteger, getRandomArrayElement} from './utils.js';
 import { DESCRIPTIONS, MAX_AVATAR, MAX_COMMENT, MAX_LIKES, MESSAGES, MIN_AVATAR, MIN_COMMENT, MIN_LIKES, NAMES, PHOTOS_COUNT } from "./constants.js";
-import { getRandomPositiveInteger } from "./utils.js";
 
 function generateRandomDescription() { // Возвращаю случайное описание фотки
   return DESCRIPTIONS[Math.floor(Math.random() * DESCRIPTIONS.length)]; // возвращаю случайное описание
 }
 
-function generateRandomLikes() {
-  return getRandomPositiveInteger(MIN_LIKES, MAX_LIKES);
-}
-
-function generateRandomComments() { // надо ли тут число каунт зарандомить от какого то до какого то? Временная вариация
-  const comments = [];
-  const count = getRandomPositiveInteger(MIN_COMMENT, MAX_COMMENT);
-
-  for (let i = 1; i <= count; i++) {
-    const comment = {
-      id: i,
-      avatar: `img/avatar-${getRandomPositiveInteger(MIN_AVATAR, MAX_AVATAR)}.svg`,
-      message: MESSAGES[getRandomPositiveInteger(0, MESSAGES.length - 1)],
-      name: NAMES[getRandomPositiveInteger(0, NAMES.length - 1)]
-    };
-    comments.push(comment);
-  }
-  return comments;
-}
-
-function generatePhoto(id) {
-  return {
-    id: id,
-    url: `photos/${id}.jpg`,
-    description: generateRandomDescription(),
-    likes: generateRandomLikes(),
-    comments: generateRandomComments()
+// Замыкание для идентификатора id комментатора
+const getCommentId = () => {
+  const commentIdArr = [];
+  return function () {
+    let currentValue = Math.floor(Math.random() * 1000);
+    while (commentIdArr.includes(currentValue)) {
+      currentValue = Math.floor(Math.random() * 1000);
+    }
+    commentIdArr.push(currentValue);
+    return currentValue;
   };
-}
-
-export const generatePhotos = () => {
-  const photos = [];
-  for (let i = 1; i <= PHOTOS_COUNT; i++) {
-    photos.push(generatePhoto(i));
-  }
-  return photos;
 };
+
+const commentId = getCommentId();
+
+// Комментарии
+const createComment = () => ({
+  id: commentId(),
+  avatar: `img/avatar-${getRandomInteger(MIN_AVATAR, MAX_AVATAR)}.svg`,
+  message: getRandomArrayElement(MESSAGES),
+  name: getRandomArrayElement(NAMES),
+});
+
+// Замыкание для создания id
+const makeCounter = function () {
+  let value = 0;
+  return {
+    increment: function () {
+      return ++value;
+    },
+  };
+};
+
+// Посты
+const counterPostId = makeCounter();
+const counterPostUrl = makeCounter();
+
+const createPost = () => ({
+  id: counterPostId.increment(),
+  url: `photos/${counterPostUrl.increment()}.jpg`,
+  description: generateRandomDescription(),
+  likes: getRandomInteger(MIN_LIKES, MAX_LIKES),
+  comments: Array.from({length: getRandomInteger(MIN_COMMENT, MAX_COMMENT)}, createComment),
+});
+
+const createPosts = () => Array.from({length: PHOTOS_COUNT}, createPost);
+export {createPosts};

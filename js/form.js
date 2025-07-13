@@ -1,5 +1,7 @@
 import {isEscapeKey, inputReset} from './utils.js';
 import {postList, onClosePostClick} from './render.js';
+import {scaleContainer, onScaleButtonsClick} from './scale.js';
+import {effectsList, onFilterClick, resetPictureStyles, addSliderEvent, removeSliderEvent} from './filter.js';
 import {MAX_DESCRIPTION_LENGTH, MAX_HASHTAGS_LENGTH} from './constants.js';
 
 const editForm = document.querySelector('.img-upload__form');
@@ -68,7 +70,7 @@ function onFormSubmit (evt) {
   }
 }
 
-// Открытие/закрытие, добавление/удаление обработчиков
+// Реализация открытия/закрытия, добавление/удаление обработчиков
 const onDocumentKeydown = (evt) => {
   if (!isEscapeKey(evt)) {
     return;
@@ -88,6 +90,9 @@ function onInputChange () {
   buttonCloseForm.addEventListener('click', onCloseButtonClick);
   addNewPhotoInput.removeEventListener('change', onInputChange);
   editForm.addEventListener('submit', onFormSubmit);
+  scaleContainer.addEventListener('click', onScaleButtonsClick);
+  effectsList.addEventListener('change', onFilterClick);
+  addSliderEvent();
 }
 
 function onCloseButtonClick () {
@@ -98,6 +103,10 @@ function onCloseButtonClick () {
   buttonCloseForm.removeEventListener('click', onCloseButtonClick);
   addNewPhotoInput.addEventListener('change', onInputChange);
   editForm.removeEventListener('submit', onFormSubmit);
+  scaleContainer.removeEventListener('click', onScaleButtonsClick);
+  effectsList.removeEventListener('change', onFilterClick);
+  removeSliderEvent();
+  resetPictureStyles();
 }
 
 function openEditForm () {

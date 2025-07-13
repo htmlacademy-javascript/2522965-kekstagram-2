@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="vendor/nouislider/nouislider.css">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <title>Кекстаграм</title>
+  <script src="js/main.js" defer></script>
 </head>
 
 <body>
@@ -31,7 +31,7 @@
       <section class="img-upload">
         <div class="img-upload__wrapper">
           <h2 class="img-upload__title  visually-hidden">Загрузка фотографии</h2>
-          <form class="img-upload__form" method="post" action="https://31.javascript.htmlacademy.pro/kekstagram" enctype="multipart/form-data" id="upload-select-image" autocomplete="off">
+          <form class="img-upload__form" id="upload-select-image" autocomplete="off">
 
             <!-- Изначальное состояние поля для загрузки изображения -->
             <fieldset class="img-upload__start">
@@ -57,7 +57,7 @@
                   </div>
 
                   <!-- Изменение глубины эффекта, накладываемого на изображение -->
-                  <fieldset class="img-upload__effect-level  effect-level hidden">
+                  <fieldset class="img-upload__effect-level  effect-level">
                     <input class="effect-level__value" type="number" step="any" name="effect-level" value="">
                     <div class="effect-level__slider"></div>
                   </fieldset>
@@ -179,7 +179,7 @@
         </div>
 
         <!-- Кнопка для выхода из полноэкранного просмотра изображения -->
-        <button type="reset" class="big-picture__cancel  cancel" id="picture-cancel" tabindex="0">Закрыть</button>
+        <button type="reset" class="big-picture__cancel  cancel" id="picture-cancel">Закрыть</button>
       </div>
     </section>
   </main>
@@ -234,10 +234,6 @@
         <h2 class="data-error__title">Не удалось загрузить данные</h2>
       </section>
     </template>
-  <script src="vendor/pristine/pristine.min.js"></script>
-  <script src="vendor/nouislider/nouislider.js"></script>
-  <script src="js/main.js" type="module"></script>
-  <script src="js/functions-task2.js"></script> <!-- Временно для дз -->
-  <script src="js/functions-task5.js"></script> <!-- Временно для дз -->
+
 </body>
 </html>

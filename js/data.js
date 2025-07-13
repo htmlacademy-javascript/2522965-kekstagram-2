@@ -29,7 +29,7 @@ const createComment = () => ({
 });
 
 // Замыкание для создания id
-const makeCounter = function () {
+const makeCounter = () => {
   let value = 0;
   return {
     increment: function () {
@@ -50,5 +50,6 @@ const createPost = () => ({
   comments: Array.from({length: getRandomInteger(MIN_COMMENT, MAX_COMMENT)}, createComment),
 });
 
-const createPosts = () => Array.from({length: PHOTOS_COUNT}, createPost);
-export {createPosts};
+const postCards = Array.from({length: PHOTOS_COUNT}, createPost);
+
+export {postCards};

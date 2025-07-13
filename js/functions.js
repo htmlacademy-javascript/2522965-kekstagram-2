@@ -18,7 +18,7 @@ function isPalindrome(str) {
   return cleanedStr === reversedStr; // Сравниваем исходную и перевернутую строки
 }
 
-// Тестирование функции
+// Тестирование
 console.log(isPalindrome('топот')); // true
 console.log(isPalindrome('ДовОд')); // true
 console.log(isPalindrome('Кекс')); // false

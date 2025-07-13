@@ -1,27 +1,28 @@
-console.log('Task-2');
-// Функция для проверки длины строки
-function checkStringLength(str, maxLength) {
-  return str.length <= maxLength;
+console.log('Task-5');
+// Проверяю, укладывается ли встреча в рабочий день
+function isMeetingWithinWorkingHours(startWork, endWork, meetingStart, duration) {
+  function timeToMinutes(timeStr) {
+    const [hours, minutes] = timeStr.split(':').map(Number);
+    return hours * 60 + minutes;
+  } // Разбиваю строку по символу ":", преобразую часы и минуты в числа, вычисляб общее кол-во минут
+
+  // Конвертирую все временные метки в минуты
+  const startWorkMinutes = timeToMinutes(startWork);
+  const endWorkMinutes = timeToMinutes(endWork);
+  const meetingStartMinutes = timeToMinutes(meetingStart);
+  const meetingEndMinutes = meetingStartMinutes + duration;
+
+  // Проверяю, что встреча начинается не раньше начала рабочего дня
+  // и заканчивается не позже конца рабочего дня
+  return (
+    meetingStartMinutes >= startWorkMinutes &&
+    meetingEndMinutes <= endWorkMinutes
+  );
 }
 
 // Тестирование функции
-console.log(checkStringLength('проверяемая строка', 20)); // true
-console.log(checkStringLength('проверяемая строка', 18)); // true
-console.log(checkStringLength('проверяемая строка', 10)); // false
-console.log(checkStringLength('короткий текст', 15)); // true
-console.log(checkStringLength('оченьдлиннаястрока', 10)); // false
-
-// Проверка палиндрома
-function isPalindrome(str) {
-  const cleanedStr = str.toLowerCase().replace(/\s+/g, ''); // Приводим строку к нижнему регистру и удаляем пробелы
-  const reversedStr = cleanedStr.split('').reverse().join(''); // Создаем перевернутую строку
-  return cleanedStr === reversedStr; // Сравниваем исходную и перевернутую строки
-}
-
-// Тестирование
-console.log(isPalindrome('топот')); // true
-console.log(isPalindrome('ДовОд')); // true
-console.log(isPalindrome('Кекс')); // false
-console.log(isPalindrome('Лёша на полке клопа нашёл ')); // true
-console.log(isPalindrome('А роза упала на лапу Азора')); // true
-console.log(isPalindrome('привет')); // false
+console.log(isMeetingWithinWorkingHours('08:00', '17:30', '14:00', 90)); // true
+console.log(isMeetingWithinWorkingHours('8:0', '10:0', '8:0', 120)); // true
+console.log(isMeetingWithinWorkingHours('08:00', '14:30', '14:00', 90)); // false
+console.log(isMeetingWithinWorkingHours('14:00', '17:30', '08:0', 90)); // false
+console.log(isMeetingWithinWorkingHours('8:00', '17:30', '08:00', 900)); // false
